@@ -11,6 +11,11 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_area_sel(object):
+    def __init__(self, area=[], debug = False):
+        super().__init__()
+        self.area_list = area
+        if(debug):print("area = " + str(area))
+
     def setupUi(self, area_sel):
         area_sel.setObjectName("area_sel")
         area_sel.resize(400, 300)
@@ -34,19 +39,25 @@ class Ui_area_sel(object):
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.quickRB = QtWidgets.QRadioButton(self.groupBox)
         self.quickRB.setChecked(True)
+        self.quickRB.clicked.connect(self.refocus)
         self.quickRB.setObjectName("quickRB")
         self.horizontalLayout_2.addWidget(self.quickRB)
         self.comboBox = QtWidgets.QComboBox(self.groupBox)
+        self.comboBox.addItems(self.area_list)
+        self.comboBox.currentTextChanged.connect(self.valueUpdate)
         self.comboBox.setObjectName("comboBox")
         self.horizontalLayout_2.addWidget(self.comboBox)
         self.verticalLayout_2.addLayout(self.horizontalLayout_2)
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
         self.userRB = QtWidgets.QRadioButton(self.groupBox)
+        self.userRB.clicked.connect(self.refocus)
         self.userRB.setObjectName("userRB")
         self.horizontalLayout_3.addWidget(self.userRB)
         self.lineEdit = QtWidgets.QLineEdit(self.groupBox)
         self.lineEdit.setMinimumSize(QtCore.QSize(100, 0))
+        self.lineEdit.setEnabled(False)
+        self.lineEdit.textChanged.connect(self.valueUpdate)
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
@@ -68,3 +79,17 @@ class Ui_area_sel(object):
         area_sel.setWindowTitle(_translate("area_sel", "選擇區間"))
         self.quickRB.setText(_translate("area_sel", "快速選擇"))
         self.userRB.setText(_translate("area_sel", "自行輸入"))
+
+    def refocus(self):
+        self.comboBox.setEnabled(not self.comboBox.isEnabled())
+        self.lineEdit.setEnabled(not self.lineEdit.isEnabled())
+        self.valueUpdate
+
+    def valueUpdate(self, debug = False):
+        self.r_value = self.lineEdit.text()
+        if(self.quickRB.isChecked()):
+            self.r_value = self.comboBox.currentText()
+        if(debug == True):
+            print("quickRB is " + str(self.quickRB.isChecked()))
+            print("userRB is " + str(self.userRB.isChecked()))
+            print("r_value = " + self.r_value)
