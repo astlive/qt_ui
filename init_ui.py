@@ -46,6 +46,7 @@ class Ui_init_Form(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.sel_Area_RB = QtWidgets.QRadioButton(self.sel_Area_GB)
         self.sel_Area_RB.setChecked(True)
+        self.sel_Area_RB.clicked.connect(self.refocus)
         self.sel_Area_RB.setObjectName("sel_Area_RB")
         self.horizontalLayout_5.addWidget(self.sel_Area_RB)
         self.sel_Area_Q_CB = QtWidgets.QComboBox(self.sel_Area_GB)
@@ -56,10 +57,12 @@ class Ui_init_Form(object):
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.sel_Area_U_RB = QtWidgets.QRadioButton(self.sel_Area_GB)
+        self.sel_Area_U_RB.clicked.connect(self.refocus)
         self.sel_Area_U_RB.setObjectName("sel_Area_U_RB")
         self.horizontalLayout_6.addWidget(self.sel_Area_U_RB)
         self.sel_Area_LE = QtWidgets.QLineEdit(self.sel_Area_GB)
         self.sel_Area_LE.setMinimumSize(QtCore.QSize(100, 0))
+        self.sel_Area_LE.setEnabled(False)
         self.sel_Area_LE.setObjectName("sel_Area_LE")
         self.horizontalLayout_6.addWidget(self.sel_Area_LE)
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
@@ -75,6 +78,7 @@ class Ui_init_Form(object):
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.quickRB_3 = QtWidgets.QRadioButton(self.sel_line_class_GB)
         self.quickRB_3.setChecked(True)
+        self.quickRB_3.clicked.connect(self.refocus)
         self.quickRB_3.setObjectName("quickRB_3")
         self.horizontalLayout_8.addWidget(self.quickRB_3)
         self.comboBox_3 = QtWidgets.QComboBox(self.sel_line_class_GB)
@@ -85,10 +89,12 @@ class Ui_init_Form(object):
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.userRB_3 = QtWidgets.QRadioButton(self.sel_line_class_GB)
+        self.userRB_3.clicked.connect(self.refocus)
         self.userRB_3.setObjectName("userRB_3")
         self.horizontalLayout_9.addWidget(self.userRB_3)
         self.lineEdit_3 = QtWidgets.QLineEdit(self.sel_line_class_GB)
         self.lineEdit_3.setMinimumSize(QtCore.QSize(100, 0))
+        self.lineEdit_3.setEnabled(False)
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.horizontalLayout_9.addWidget(self.lineEdit_3)
         self.verticalLayout_4.addLayout(self.horizontalLayout_9)
@@ -104,6 +110,7 @@ class Ui_init_Form(object):
         self.horizontalLayout_11.setObjectName("horizontalLayout_11")
         self.quickRB_4 = QtWidgets.QRadioButton(self.sel_line_num_GB)
         self.quickRB_4.setChecked(True)
+        self.quickRB_4.clicked.connect(self.refocus)
         self.quickRB_4.setObjectName("quickRB_4")
         self.horizontalLayout_11.addWidget(self.quickRB_4)
         self.comboBox_4 = QtWidgets.QComboBox(self.sel_line_num_GB)
@@ -114,10 +121,12 @@ class Ui_init_Form(object):
         self.horizontalLayout_12 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_12.setObjectName("horizontalLayout_12")
         self.userRB_4 = QtWidgets.QRadioButton(self.sel_line_num_GB)
+        self.userRB_4.clicked.connect(self.refocus)
         self.userRB_4.setObjectName("userRB_4")
         self.horizontalLayout_12.addWidget(self.userRB_4)
         self.lineEdit_4 = QtWidgets.QLineEdit(self.sel_line_num_GB)
         self.lineEdit_4.setMinimumSize(QtCore.QSize(100, 0))
+        self.lineEdit_4.setEnabled(False)
         self.lineEdit_4.setObjectName("lineEdit_4")
         self.horizontalLayout_12.addWidget(self.lineEdit_4)
         self.verticalLayout_5.addLayout(self.horizontalLayout_12)
@@ -144,6 +153,28 @@ class Ui_init_Form(object):
         self.quickRB_4.setText(_translate("init_Form", "快速選擇"))
         self.userRB_4.setText(_translate("init_Form", "自行輸入"))
         self.pushButton.setText(_translate("init_Form", "確認"))
+
+    def refocus(self):
+        if(self.sel_Area_RB.isChecked()):
+            self.sel_Area_Q_CB.setEnabled(True)
+            self.sel_Area_LE.setEnabled(False)
+        elif(self.sel_Area_U_RB.isChecked()):
+            self.sel_Area_Q_CB.setEnabled(False)
+            self.sel_Area_LE.setEnabled(True)
+
+        if(self.quickRB_3.isChecked()):
+            self.comboBox_3.setEnabled(True)
+            self.lineEdit_3.setEnabled(False)
+        elif(self.userRB_3.isChecked()):
+            self.comboBox_3.setEnabled(False)
+            self.lineEdit_3.setEnabled(True)
+
+        if(self.quickRB_4.isChecked()):
+            self.comboBox_4.setEnabled(True)
+            self.lineEdit_4.setEnabled(False)
+        elif(self.userRB_4.isChecked()):
+            self.comboBox_4.setEnabled(False)
+            self.lineEdit_4.setEnabled(True)
 
     def buttonclick(self, init_Form, debug = False):
         self.r_area = self.sel_Area_LE.text()
