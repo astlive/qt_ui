@@ -10,27 +10,28 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_area_sel(object):
-    def __init__(self, area=[], debug = False):
+class Ui_sel_dialog(object):
+    def __init__(self, items=[], debug = False):
         super().__init__()
-        self.area_list = area
-        if(debug):print("area = " + str(area))
+        self.lists = items
+        self.title = ""
+        if(debug):print("self.lists = " + str(self.lists))
 
-    def setupUi(self, area_sel):
-        area_sel.setObjectName("area_sel")
-        area_sel.resize(400, 300)
+    def setupUi(self, sel_dialog):
+        sel_dialog.setObjectName("sel_dialog")
+        sel_dialog.resize(400, 300)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(area_sel.sizePolicy().hasHeightForWidth())
-        area_sel.setSizePolicy(sizePolicy)
-        area_sel.setMinimumSize(QtCore.QSize(400, 300))
-        area_sel.setMaximumSize(QtCore.QSize(400, 300))
-        self.verticalLayout = QtWidgets.QVBoxLayout(area_sel)
+        sizePolicy.setHeightForWidth(sel_dialog.sizePolicy().hasHeightForWidth())
+        sel_dialog.setSizePolicy(sizePolicy)
+        sel_dialog.setMinimumSize(QtCore.QSize(400, 300))
+        sel_dialog.setMaximumSize(QtCore.QSize(400, 300))
+        self.verticalLayout = QtWidgets.QVBoxLayout(sel_dialog)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.groupBox = QtWidgets.QGroupBox(area_sel)
+        self.groupBox = QtWidgets.QGroupBox(sel_dialog)
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("groupBox")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.groupBox)
@@ -43,7 +44,7 @@ class Ui_area_sel(object):
         self.quickRB.setObjectName("quickRB")
         self.horizontalLayout_2.addWidget(self.quickRB)
         self.comboBox = QtWidgets.QComboBox(self.groupBox)
-        self.comboBox.addItems(self.area_list)
+        self.comboBox.addItems(self.lists)
         self.comboBox.currentTextChanged.connect(self.valueUpdate)
         self.comboBox.setObjectName("comboBox")
         self.horizontalLayout_2.addWidget(self.comboBox)
@@ -63,24 +64,28 @@ class Ui_area_sel(object):
         self.verticalLayout_2.addLayout(self.horizontalLayout_3)
         self.horizontalLayout.addWidget(self.groupBox)
         self.verticalLayout.addLayout(self.horizontalLayout)
-        self.buttonBox = QtWidgets.QDialogButtonBox(area_sel)
+        self.buttonBox = QtWidgets.QDialogButtonBox(sel_dialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
         self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
         self.verticalLayout.addWidget(self.buttonBox)
 
-        self.retranslateUi(area_sel)
-        self.buttonBox.accepted.connect(area_sel.accept)
-        self.buttonBox.rejected.connect(area_sel.reject)
-        QtCore.QMetaObject.connectSlotsByName(area_sel)
+        self.retranslateUi(sel_dialog)
+        self.buttonBox.accepted.connect(sel_dialog.accept)
+        self.buttonBox.rejected.connect(sel_dialog.reject)
+        QtCore.QMetaObject.connectSlotsByName(sel_dialog)
 
         self.valueUpdate()
 
-    def retranslateUi(self, area_sel):
+    def retranslateUi(self, sel_dialog):
         _translate = QtCore.QCoreApplication.translate
-        area_sel.setWindowTitle(_translate("area_sel", "選擇區間"))
-        self.quickRB.setText(_translate("area_sel", "快速選擇"))
-        self.userRB.setText(_translate("area_sel", "自行輸入"))
+        sel_dialog.setWindowTitle(_translate("sel_dialog", self.title))
+        self.quickRB.setText(_translate("sel_dialog", "快速選擇"))
+        self.userRB.setText(_translate("sel_dialog", "自行輸入"))
+
+    def resetui(self, n_title="", n_list=[]):
+        self.title = n_title
+        self.lists = n_list
 
     def refocus(self):
         self.comboBox.setEnabled(not self.comboBox.isEnabled())
