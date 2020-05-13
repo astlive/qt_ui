@@ -91,6 +91,12 @@ class mainwid(QtWidgets.QWidget):
 
     def synctime(self):
         self.ui.time_label.setText(transtext("日期:", datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 0))
+
+    def closeEvent(self, QCloseEvent):
+        reply = QtWidgets.QMessageBox.question(self, '離開', '確定關閉程式?\r\n將遺失未儲存的內容',
+                QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
+        if(reply == QtWidgets.QMessageBox.No):
+            QCloseEvent.ignore()
         
 if __name__ == "__main__":
     line_num = ['左側', '右側', '單線']

@@ -13,9 +13,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_init_Form(object):
     def __init__(self, area=[], line_class=[], line_num=[], debug = False):
         super().__init__()
+        self.r_c = 0
         self.area_list = area
         self.line_class_list = line_class
         self.line_num_list = line_num
+        self.r_area = ""
+        self.r_line_class = ""
+        self.r_line_num = ""
         if(debug):print("area = " + str(area))
         if(debug):print("line_class = " + str(line_class))
         if(debug):print("line_num = " + str(line_num))
@@ -154,5 +158,6 @@ class Ui_init_Form(object):
         if(debug):print("area = " + str(self.r_area))
         if(debug):print("line_class = " + str(self.r_line_class))
         if(debug):print("line_num = " + str(self.r_line_num))
+        self.r_c = 1
         QtCore.QCoreApplication.instance().quit()
 
