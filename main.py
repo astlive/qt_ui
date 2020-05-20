@@ -9,6 +9,7 @@ from PyQt5 import QtGui, QtWidgets, QtCore
 import sys
 import functools
 from datetime import datetime
+import cv2
 
 class mainwid(QtWidgets.QWidget):
     def __init__(self, line_num=[], line_class=[], area=[], parent=None):

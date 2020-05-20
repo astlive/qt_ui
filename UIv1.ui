@@ -182,46 +182,48 @@
    <item>
     <layout class="QHBoxLayout" name="cam_layout">
      <item>
-      <widget class="QGraphicsView" name="left_cam_view">
+      <widget class="QLabel" name="left_view_label">
        <property name="minimumSize">
         <size>
          <width>320</width>
          <height>320</height>
         </size>
        </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="right_cam_view">
+      <widget class="QLabel" name="mid_view_label">
        <property name="minimumSize">
         <size>
          <width>320</width>
          <height>320</height>
         </size>
        </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
       </widget>
      </item>
      <item>
-      <widget class="QGraphicsView" name="confirm_view">
+      <widget class="QLabel" name="right_view_label">
        <property name="minimumSize">
         <size>
          <width>320</width>
          <height>320</height>
         </size>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="obj_table">
-     <property name="minimumSize">
-      <size>
-       <width>960</width>
-       <height>240</height>
-      </size>
-     </property>
-    </widget>
+    <widget class="QTableWidget" name="tableWidget"/>
    </item>
   </layout>
  </widget>
